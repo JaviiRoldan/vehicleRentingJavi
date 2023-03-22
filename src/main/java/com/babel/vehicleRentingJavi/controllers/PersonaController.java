@@ -2,6 +2,7 @@ package com.babel.vehicleRentingJavi.controllers;
 
 import com.babel.vehicleRentingJavi.exceptions.RequiredMissingFieldException;
 import com.babel.vehicleRentingJavi.models.Persona;
+import com.babel.vehicleRentingJavi.models.Renta;
 import com.babel.vehicleRentingJavi.services.PersonaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,6 @@ public class PersonaController {
     }
     @PostMapping("/persona")
     ResponseEntity addPersona(@RequestBody Persona persona) throws RequiredMissingFieldException {
-
-
         try{
             this.personaService.addPersona(persona);
         }catch(RequiredMissingFieldException e){
@@ -28,5 +27,20 @@ public class PersonaController {
         }
         return ResponseEntity.ok(String.format("Persona añadida. Id: %d", persona.getPersonaID()));
     }
+
+    @PostMapping("/renta")
+    ResponseEntity addRenta(@RequestBody Renta renta) throws RequiredMissingFieldException {
+
+        //try{
+            this.personaService.addRenta(renta);
+        //}catch(RequiredMissingFieldException e){
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Comprueba los datos de entrada de renta");
+        //}catch(Exception e){
+        //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        //}
+        return ResponseEntity.ok(String.format("Renta añadida. Id: %d", renta.getRentaId()));
+    }
 }
+
+
 //altaRenta+scoringprofesion
