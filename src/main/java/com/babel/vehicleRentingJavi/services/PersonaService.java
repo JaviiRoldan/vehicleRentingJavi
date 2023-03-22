@@ -11,6 +11,9 @@ public interface PersonaService {
 
 
     Renta addRenta(Renta renta);
-    Profesion addRentaProfesion(Profesion profesion);
+    void validateRentaExisteProfesion(Integer profesionId) throws RequiredMissingFieldException;
 
-    }
+    //Profesion addRentaProfesion(Profesion profesion);
+
+
+}

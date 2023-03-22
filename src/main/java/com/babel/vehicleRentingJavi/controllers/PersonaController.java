@@ -28,6 +28,7 @@ public class PersonaController {
         return ResponseEntity.ok(String.format("Persona añadida. Id: %d", persona.getPersonaID()));
     }
 
+
     @PostMapping("/renta")
     ResponseEntity addRenta(@RequestBody Renta renta) throws RequiredMissingFieldException {
 

@@ -65,17 +65,21 @@ public class PersonaServiceImpl implements PersonaService {
         this.rentaMapper.insertRenta(renta);
         return renta;
     }
+    public void validateRentaExisteProfesion(Integer profesionId) {
+        profesionMapper.existeProfesion(profesionId);
 
+    }
+
+
+    /*
     @Override
     public Profesion addRentaProfesion(Profesion profesion) {
         this.profesionMapper.insertProfesion(profesion);
         return profesion;
     }
-    private void validateRentaExistePersona(Integer personaId) throws RequiredMissingFieldException {
+    */
 
-    }
-    private void validateRentaExisteProfesion(Integer profesionId) throws RequiredMissingFieldException {
 
-    }
+
 
 }
