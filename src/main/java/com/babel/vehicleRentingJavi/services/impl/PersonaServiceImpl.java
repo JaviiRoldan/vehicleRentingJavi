@@ -54,7 +54,6 @@ public class PersonaServiceImpl implements PersonaService {
     private void validateNombre(Persona persona) throws RequiredMissingFieldException {
         if(persona.getNombre() == null || persona.getNombre().isEmpty()){
             throw new RequiredMissingFieldException();
-
         }
     }
 
@@ -65,9 +64,11 @@ public class PersonaServiceImpl implements PersonaService {
         this.rentaMapper.insertRenta(renta);
         return renta;
     }
-    public void validateRentaExisteProfesion(Integer profesionId) {
-        profesionMapper.existeProfesion(profesionId);
-
+    public void validateExisteProfesion(Integer profesionId) throws RequiredMissingFieldException{
+        int existeProfesion = profesionMapper.existeProfesion(profesionId);
+        if(existeProfesion==0){
+            throw new RequiredMissingFieldException();
+        }
     }
 
 

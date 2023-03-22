@@ -31,14 +31,14 @@ public class PersonaController {
 
     @PostMapping("/renta")
     ResponseEntity addRenta(@RequestBody Renta renta) throws RequiredMissingFieldException {
-
-        //try{
-            this.personaService.addRenta(renta);
-        //}catch(RequiredMissingFieldException e){
-            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Comprueba los datos de entrada de renta");
-        //}catch(Exception e){
-        //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        //}
+        try{
+            this.personaService.validateExisteProfesion(renta.getProfesionId());
+        }catch(RequiredMissingFieldException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No existe esa ID de profesion");
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        this.personaService.addRenta(renta);
         return ResponseEntity.ok(String.format("Renta añadida. Id: %d", renta.getRentaId()));
     }
 }
