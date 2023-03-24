@@ -2,7 +2,6 @@ package com.babel.vehicleRentingJavi.controllers;
 
 import com.babel.vehicleRentingJavi.exceptions.RequiredMissingFieldException;
 import com.babel.vehicleRentingJavi.models.Persona;
-import com.babel.vehicleRentingJavi.models.Renta;
 import com.babel.vehicleRentingJavi.services.PersonaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,8 @@ public class PersonaController {
     PersonaController(PersonaService personaService){
         this.personaService = personaService;
     }
+
+
     @PostMapping("/persona")
     ResponseEntity addPersona(@RequestBody Persona persona) throws RequiredMissingFieldException {
         try{
@@ -27,21 +28,4 @@ public class PersonaController {
         }
         return ResponseEntity.ok(String.format("Persona añadida. Id: %d", persona.getPersonaID()));
     }
-
-
-    @PostMapping("/renta")
-    ResponseEntity addRenta(@RequestBody Renta renta) throws RequiredMissingFieldException {
-        try{
-            this.personaService.validateExisteProfesion(renta.getProfesionId());
-        }catch(RequiredMissingFieldException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No existe esa ID de profesion");
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-        this.personaService.addRenta(renta);
-        return ResponseEntity.ok(String.format("Renta añadida. Id: %d", renta.getRentaId()));
-    }
 }
-
-
-//altaRenta+scoringprofesion

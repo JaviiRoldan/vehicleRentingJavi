@@ -1,6 +1,5 @@
 package com.babel.vehicleRentingJavi.persistance.database.mappers;
 
-import com.babel.vehicleRentingJavi.models.Direccion;
 import com.babel.vehicleRentingJavi.models.Persona;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

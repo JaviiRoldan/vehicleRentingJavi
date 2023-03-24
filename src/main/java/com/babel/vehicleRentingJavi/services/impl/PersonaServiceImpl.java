@@ -2,8 +2,6 @@ package com.babel.vehicleRentingJavi.services.impl;
 
 import com.babel.vehicleRentingJavi.exceptions.RequiredMissingFieldException;
 import com.babel.vehicleRentingJavi.models.Persona;
-import com.babel.vehicleRentingJavi.models.Profesion;
-import com.babel.vehicleRentingJavi.models.Renta;
 import com.babel.vehicleRentingJavi.persistance.database.mappers.DireccionMapper;
 import com.babel.vehicleRentingJavi.persistance.database.mappers.PersonaMapper;
 import com.babel.vehicleRentingJavi.persistance.database.mappers.ProfesionMapper;
@@ -16,15 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class PersonaServiceImpl implements PersonaService {
     private PersonaMapper personaMapper;
     private DireccionMapper direccionMapper;
-    private RentaMapper rentaMapper;
 
-    private ProfesionMapper profesionMapper;
-
-    public PersonaServiceImpl(PersonaMapper personaMapper, DireccionMapper direccionMapper, RentaMapper rentaMapper, ProfesionMapper profesionMapper) {
+    public PersonaServiceImpl(PersonaMapper personaMapper, DireccionMapper direccionMapper) {
         this.personaMapper = personaMapper;
         this.direccionMapper = direccionMapper;
-        this.rentaMapper = rentaMapper;
-        this.profesionMapper = profesionMapper;
     }
 
     @Override
@@ -37,7 +30,8 @@ public class PersonaServiceImpl implements PersonaService {
         this.personaMapper.insertPersona(persona);
         return persona;
     }
-    public Persona addPersonaDireccion(Persona persona){
+
+    private Persona addPersonaDireccion(Persona persona){
         this.direccionMapper.insertDireccion(persona.getDireccionDomicilio());
 
         if(persona.isDireccionDomicilioSameAsNotificaciones()){
@@ -57,30 +51,16 @@ public class PersonaServiceImpl implements PersonaService {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //RENTA
     @Override
-    public Renta addRenta(Renta renta){
-        this.rentaMapper.insertRenta(renta);
-        return renta;
+    public void validateExistePersona(Integer personaId) throws RequiredMissingFieldException {
+
     }
-    public void validateExisteProfesion(Integer profesionId) throws RequiredMissingFieldException{
-        int existeProfesion = profesionMapper.existeProfesion(profesionId);
-        if(existeProfesion==0){
+
+    @Override
+    public Persona getPerson(Integer personaId) throws RequiredMissingFieldException {
+        if(personaId<=0){
             throw new RequiredMissingFieldException();
         }
+        return null;
     }
-
-
-    /*
-    @Override
-    public Profesion addRentaProfesion(Profesion profesion) {
-        this.profesionMapper.insertProfesion(profesion);
-        return profesion;
-    }
-    */
-
-
-
-
 }
